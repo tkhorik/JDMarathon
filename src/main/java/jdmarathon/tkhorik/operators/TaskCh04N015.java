@@ -37,14 +37,14 @@ public class TaskCh04N015 {
     }
 
 
-    private static LocalDate convertToLocalDateInstant(Date dateToConvert) {
-        return dateToConvert.toInstant()
-                .atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
     private static Date convertedTodateToConvert(String in1) throws ParseException {
         DateFormat dateToConvert = new SimpleDateFormat("MM yyyy");
         return dateToConvert.parse(in1);
+    }
+
+    private static LocalDate convertToLocalDateInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     private static int fromStringToDateConverter(String in1, String in2) throws ParseException {
