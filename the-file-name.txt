@@ -1,0 +1,1 @@
+[Contact{id=1, contactNumber=1, name='TestName', surname='TestSurname', phoneNumber='+123456789'}, Contact{id=1qa, contactNumber=1qa, name='1qa', surname='1qa', phoneNumber='1qaa'}]

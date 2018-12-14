@@ -8,7 +8,7 @@ package jdmarathon.tkhorik.operators;
 
 import java.util.Scanner;
 
-public class TaskCh04N106 {
+    public class TaskCh04N106 {
     public static void main(String[] args) {
         MyCustomizedScanner scanner = new MyCustomizedScanner();
         StorageForScannedValue storage = new StorageForScannedValue();
