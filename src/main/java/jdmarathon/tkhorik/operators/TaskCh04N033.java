@@ -1,9 +1,5 @@
 package jdmarathon.tkhorik.operators;
 
-//4.33 Дано натуральное число.
-//        а) Верно ли, что оно заканчивается четной цифрой?
-//        б) Верно ли, что оно заканчивается нечетной цифрой?
-
 
 public class TaskCh04N033 {
     public static void main(String[] args) {

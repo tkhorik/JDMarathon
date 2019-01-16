@@ -3,9 +3,6 @@ package jdmarathon.tkhorik;
 import java.util.Scanner;
 
 
-//*1.3 Составить программу вывода на экран числа, вводимого с клавиатуры. Выводимому числу должно предшествовать сообщение "Вы ввели число".
-//Использовать java.util.Scanner для ввода.*/
-
 public class TaskCh01N003 {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);

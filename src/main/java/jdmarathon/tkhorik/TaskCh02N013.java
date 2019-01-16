@@ -1,10 +1,5 @@
 package jdmarathon.tkhorik;
 
-/*Дано трехзначное число(100 ≤ X ≤ 999). Найти число, полученное при прочтении его цифр справа налево.
-Не использовать java.lang.String, java.lang.StringBuilder и т.п.
-Только числа и арифметические операции.
-Пример: 234 -> 432, 560 -> 65*/
-
 import java.util.ArrayList;
 import java.util.Scanner;
 

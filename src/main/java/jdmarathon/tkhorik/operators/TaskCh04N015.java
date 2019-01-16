@@ -1,22 +1,5 @@
 package jdmarathon.tkhorik.operators;
 
-/*4.15 Известны год и номер месяца рождения человека, а также год и номер месяца
-        сегодняшнего дня (январь — 1 и т. д.). Определить возраст человека (число
-        полных лет). В случае совпадения указанных номеров месяцев считать, что
-        прошел полный год.
-
-        test1:
-        in1 (today m y):           12 2014
-        in2 (bd m y):    	        6 1985
-        out:	    		 29
-        test2:
-        in1 (today m y):           5 2014
-        in2 (bd m y):              6 1985
-        out:    			 28
-        test3:
-        in1 (today m y):           6 2014
-        in2 (bd m y):    	       6 1985
-        out:    			 29*/
 
 import java.text.DateFormat;
 import java.text.ParseException;
