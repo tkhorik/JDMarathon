@@ -21,19 +21,19 @@ public class Runner {
         daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
 //        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
 
-
-
         List<Contact> contactList = new LinkedList<>();
+
+
 //        idaoContact.saveAll(contactList);
-/*        daotextfilesaving.getAllStoredContacts(contactList);
+        daotextfilesaving.getAllStoredContacts(contactList);
         System.out.println(contactList);
 
-        daotextfilesaving.addContact();
-        daotextfilesaving.saveAll();
+//        daotextfilesaving.addContact();
+//        daotextfilesaving.saveAll();
 
         addContactFromConsole(contactList);
         addContact(contactList);
-        daotextfilesaving.saveAll(contactList);*/
+        daotextfilesaving.saveAll(contactList);
 //        printAllContactList(contactList);
 
 //        получить данные пользователя
