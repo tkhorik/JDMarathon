@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ServerletPOST extends HttpServlet {
     private static final long serialVersionUID = -1641096228274971485L;
-
+/*https://javatutorial.net/java-servlet-post-example form added during tutorial from present tutorial resource*/
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class ServerletPOST extends HttpServlet {
                 .append("		</head>\r\n")
                 .append("		<body>\r\n")
                 .append("			<form action=\"welcome\" method=\"POST\">\r\n")
-                .append("				Enter your name: \r\n")
+                .append("				Enter your name and push the button: \r\n")
                 .append("				<input type=\"text\" name=\"user\" />\r\n")
                 .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
                 .append("			</form>\r\n")
