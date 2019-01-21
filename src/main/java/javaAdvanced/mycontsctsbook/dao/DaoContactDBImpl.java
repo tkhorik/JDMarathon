@@ -18,7 +18,7 @@ public class DaoContactDBImpl implements IDAOContact {
     }
 
     @Override
-    public ArrayList<String> getAllStoredContacts(List<Contact> contactList) {
+    public ArrayList<Contact> getAllStoredContacts() {
         return null;
     }
 

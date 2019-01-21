@@ -11,7 +11,7 @@ public interface IDAOContact {
 
     Contact addContact(Contact t);
 
-    ArrayList<String> getAllStoredContacts(List<Contact> contactList);
+    ArrayList<Contact> getAllStoredContacts();
 
     void delete(Contact t);
 

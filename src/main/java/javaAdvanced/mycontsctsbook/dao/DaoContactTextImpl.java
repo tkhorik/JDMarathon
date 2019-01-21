@@ -36,10 +36,10 @@ public class DaoContactTextImpl implements IDAOContact {
     }
 
     @Override
-    public ArrayList<String> getAllStoredContacts(List<Contact> contactList) {
+    public ArrayList<Contact> getAllStoredContacts() {
         Scanner s = null;
         try {
-            s = new Scanner(new File("the-file-name.txt"));
+            s = new Scanner(new File("/home/marv/Dropbox/the-file-name.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -49,7 +49,8 @@ public class DaoContactTextImpl implements IDAOContact {
         }
         System.out.println(list );
         s.close();//todo: create split method to add all array elements in correct places
-        return list;
+        ArrayList<Contact> result = new ArrayList<>();
+        return result;
     }
 
     @Override

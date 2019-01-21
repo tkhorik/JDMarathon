@@ -25,7 +25,7 @@ public class Runner {
 
 
 //        idaoContact.saveAll(contactList);
-        daotextfilesaving.getAllStoredContacts(contactList);
+//        daotextfilesaving.getAllStoredContacts(contactList);
         System.out.println(contactList);
 
 //        daotextfilesaving.addContact();
