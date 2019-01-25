@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="myPersonalBean" class="javaAdvanced.mycontsctsbook.dao.DaoContactDBImpl"/>
+    <bean id="myPersonalBean" class="javaAdvanced.mycontsctsbook.dao.MyDbMethodsRealization"/>
     <bean id="mySavingIntoFileBean" class="javaAdvanced.mycontsctsbook.dao.DaoContactTextImpl"/>
-    <bean id="mySavingIntoDbBean" class="javaAdvanced.mycontsctsbook.dao.DaoContactDBImpl"/>
+    <bean id="myDbMethodsRealization" class="javaAdvanced.mycontsctsbook.dao.MyDbMethodsRealization"/>
 </beans>

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Contact implements Comparable<Contact> {
 
-    String id;
+    int id;
     String contactNumber;
     String name;
     String surname;
@@ -39,7 +39,7 @@ public class Contact implements Comparable<Contact> {
         return Objects.hash(id, contactNumber, name, surname, phoneNumber);
     }
 
-    public Contact(String id, String contactNumber, String name, String surname, String phoneNumber) {
+    public Contact(int id, String contactNumber, String name, String surname, String phoneNumber) {
         this.id = id;
         this.contactNumber = contactNumber;
         this.name = name;

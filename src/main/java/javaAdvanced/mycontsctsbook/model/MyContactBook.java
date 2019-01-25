@@ -50,10 +50,13 @@ public class MyContactBook {
 
 
     public static void addContact(Collection collection) {
-        collection.add(new Contact("1", "1", "TestName", "TestSurname", "+123456789"));
-        collection.add(new Contact(getValuesFromScanner("id"), getValuesFromScanner("contactNumber"),
-                getValuesFromScanner("name"), getValuesFromScanner("surname"),
-                getValuesFromScanner("phoneNumber")));
+        collection.add(new Contact(11, "1", "TestName", "TestSurname", "+123456789"));
+        /*collection.add(new Contact(
+                getValuesFromScanner("id"),
+                getValuesFromScanner("contactNumber"),
+                getValuesFromScanner("name"),
+                getValuesFromScanner("surname"),
+                getValuesFromScanner("phoneNumber")));*/
     }
 }
 

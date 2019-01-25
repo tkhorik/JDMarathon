@@ -8,7 +8,6 @@
     <servlet>
         <servlet-name>servletPost</servlet-name>
         <servlet-class>ServerletPOST</servlet-class>
-
         <load-on-startup>1</load-on-startup>
     </servlet>
 

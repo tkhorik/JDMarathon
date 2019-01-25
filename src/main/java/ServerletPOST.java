@@ -3,6 +3,7 @@ import javaAdvanced.mycontsctsbook.model.Contact;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -16,33 +17,34 @@ import javax.servlet.http.HttpServletResponse;
 public class ServerletPOST extends HttpServlet {
     private static final long serialVersionUID = -1641096228274971485L;
     /*https://javatutorial.net/java-servlet-post-example form added during tutorial from present tutorial resource*/
-    private static final String SERVLET_CONTEXT_KEY_INIT_PARAMETER = "servletContextKey";
+//    private static final String SERVLET_CONTEXT_KEY_INIT_PARAMETER = "servletContextKey";
 
 //    private HttpServlet mServlet;
 
     private ApplicationContext context;
     private IDAOContact idaoContact;
-    private IDAOContact daotextfilesaving;
-    private List<Contact> contactList = new LinkedList<>();
+    //    private IDAOContact daotextfilesaving;
+    private IDAOContact daoDBimpl;
+
+//    private List<Contact> contactList = new LinkedList<>();
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         context = new ClassPathXmlApplicationContext("context.xml");
-        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
-//        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
+//        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
+        daoDBimpl = (IDAOContact) context.getBean("myDbMethodsRealization");
+        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
     }
-
-
-
-
-
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        contactList = daotextfilesaving.getAllStoredContacts();
+        List<Contact> contactList = daoDBimpl.getAllStoredContacts();
+
+        for (Contact contact : contactList) {
+            System.out.println(contact);
+        }
 
         // set response headers
         response.setContentType("text/html");
@@ -60,11 +62,12 @@ public class ServerletPOST extends HttpServlet {
                 .append("				Enter your name and push the button: \r\n")
                 .append("				<input type=\"text\" name=\"user\" />\r\n")
                 .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
-                .append("wqer")
-                .append(contactList.toString())
                 .append("			</form>\r\n")
-                .append("		</body>\r\n")
-                .append("</html>\r\n");
+                .append("		<div>\r\n");
+        for (Contact contact : contactList) {
+            writer.append("<div>"+ contact+"		</div>\r\n");
+        }
+                writer.append("</html>\r\n");
     }
 
     @Override

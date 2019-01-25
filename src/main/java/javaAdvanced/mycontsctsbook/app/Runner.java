@@ -5,6 +5,7 @@ import javaAdvanced.mycontsctsbook.model.Contact;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,22 +19,37 @@ public class Runner {
     public static void main(String[] args) {
 
         context = new ClassPathXmlApplicationContext("context.xml");
-        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
+        IDAOContact myDbMethodsRealization = (IDAOContact) context.getBean("myDbMethodsRealization");
+
+//        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
 //        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
+        ArrayList<Contact> contactList = new ArrayList<>();
 
-        List<Contact> contactList = new LinkedList<>();
 
 
-//        idaoContact.saveAll(contactList);
-//        daotextfilesaving.getAllStoredContacts(contactList);
-        System.out.println(contactList);
+//        System.out.println(daotextfilesaving.getAllStoredContacts());
 
 //        daotextfilesaving.addContact();
 //        daotextfilesaving.saveAll();
 
-        addContactFromConsole(contactList);
-        addContact(contactList);
-        daotextfilesaving.saveAll(contactList);
+//        addContactFromConsole(contactList);
+//        addContact(contactList);
+//        daotextfilesaving.saveAll(contactList);
+
+
+
+        /*
+        * надо дл] начала реализовать
+        * daoDBimpl
+        * 1
+        *
+        *
+        * */
+
+      contactList = myDbMethodsRealization.getAllStoredContacts();
+        System.out.println("qwe= "+contactList);
+        System.out.println(contactList);
+
 //        printAllContactList(contactList);
 
 //        получить данные пользователя
