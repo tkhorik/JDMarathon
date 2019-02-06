@@ -21,28 +21,48 @@ public class MyDbMethodsRealization implements IDAOContact {
     }
 
     @Override
-    public Contact addContact(Contact t) {
-        return null;
+    public void addContact(Contact contact) {
+        Connection cn = getDBConnection();
+        Statement stmt = null;
+        try {
+            createDbIfNotExist(cn);
+            cn.setAutoCommit(false);
+                        stmt = createDbIfNotExist(cn);
+//            stmt = cn.createStatement();
+//            stmt.execute("CREATE TABLE IF NOT EXISTS PERSON(idt bigint auto_increment,contactNumber varchar(255),name varchar(255), surname varchar(255),phoneNumber varchar(255))");
+            cn.commit();
+            String sql = "INSERT INTO PERSON (CONTACTNUMBER, NAME, SURNAME, PHONENUMBER) " +
+                    "VALUES('"+contact.getContactNumber() + "','" + contact.getName() + "','" + contact.getName() + "','" + contact.getPhoneNumber() + "')";
+            stmt.execute(sql);
+            cn.commit();
+            System.out.println(sql);
+        } catch (SQLException e) {
+            System.out.println("Exception Message " + e.getLocalizedMessage());
+
+        } finally {
+            if (cn != null) {
+                try {
+                    cn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
     }
 
     @Override
-    public ArrayList<Contact> getAllStoredContacts() {
+    public ArrayList<Contact> getAllStoredContacts() throws SQLException {
 
         Connection connection = getDBConnection();
         Statement stmt = null;
+        stmt = connection.createStatement();
+
         ArrayList<Contact> contactList = new ArrayList<Contact>();
 
         try {
             connection.setAutoCommit(false);
-            stmt = connection.createStatement();
-                       stmt.execute("CREATE TABLE IF NOT EXISTS PERSON(id int primary key, " +
-                               "contactNumber varchar(255)" +
-                               ", name varchar(255), " +
-                               "surname varchar(255), " +
-                               "phoneNumber varchar(255))");
-/*                stmt.execute("INSERT INTO PERSON( name) VALUES( 'Anju')");
-                stmt.execute("INSERT INTO PERSON( name) VALUES( 'Sonia')");
-                stmt.execute("INSERT INTO PERSON( name) VALUES( 'Asha')");*/
             ResultSet rs = stmt.executeQuery("select * from PERSON");
             System.out.println("H2 Database inserted through Statement");
             while (rs.next()) {
@@ -54,9 +74,6 @@ public class MyDbMethodsRealization implements IDAOContact {
                         rs.getString(5)
                 );
                 contactList.add(contact);
-//                stmt.close();
-//                connection.commit();
-//                    System.out.println("Id "+rs.getInt("id")+" Name "+rs.getString("name"));
             }
         } catch (SQLException e) {
             System.out.println("Exception Message " + e.getLocalizedMessage());
@@ -69,16 +86,26 @@ public class MyDbMethodsRealization implements IDAOContact {
                 e.printStackTrace();
             }
         }
-//        Log.info(String.valueOf(contactList));
         return contactList;
     }
 
-    @Override
-    public void delete(Contact t) {
-
+     Statement createDbIfNotExist(Connection connection) throws SQLException {
+        Statement stmt;
+        stmt = connection.createStatement();
+        stmt.execute("CREATE TABLE IF NOT EXISTS PERSON(id bigint auto_increment primary key, " +
+                "contactNumber varchar(255)," +
+                "name varchar(255), " +
+                "surname varchar(255), " +
+                "phoneNumber varchar(255))");
+        return stmt;
     }
 
-    private static Connection getDBConnection() {
+
+    @Override
+    public void delete(Contact t) {
+    }
+
+    private Connection getDBConnection() {
         Connection dbConnection = null;
         try {
             Class.forName(DB_DRIVER);

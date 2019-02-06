@@ -2,6 +2,7 @@ package javaAdvanced.mycontsctsbook.dao;
 
 import javaAdvanced.mycontsctsbook.model.Contact;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,9 @@ public interface IDAOContact {
 
     List<Contact> saveAll(List<Contact> in);
 
-    Contact addContact(Contact t);
+    void addContact(Contact t);
 
-    ArrayList<Contact> getAllStoredContacts();
+    ArrayList<Contact> getAllStoredContacts() throws SQLException;
 
     void delete(Contact t);
 

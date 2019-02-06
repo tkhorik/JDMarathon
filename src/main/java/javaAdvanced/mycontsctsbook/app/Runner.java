@@ -5,7 +5,9 @@ import javaAdvanced.mycontsctsbook.model.Contact;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,33 +26,21 @@ public class Runner {
 //        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
 //        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
         ArrayList<Contact> contactList = new ArrayList<>();
+//        ArrayList<Contact> allStoredContacts = myDbMethodsRealization.getAllStoredContacts();
+        Contact contact = new Contact("a2ebc", "dfg", "sdqd", "12223123");
+        myDbMethodsRealization.addContact(contact);
+//        System.out.println("wwwwwnew"+allStoredContacts);
 
 
+        try {
+            contactList = myDbMethodsRealization.getAllStoredContacts();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        printAllContactList(contactList);
 
-//        System.out.println(daotextfilesaving.getAllStoredContacts());
+//        System.out.println("qwe= "+contactList);
 
-//        daotextfilesaving.addContact();
-//        daotextfilesaving.saveAll();
-
-//        addContactFromConsole(contactList);
-//        addContact(contactList);
-//        daotextfilesaving.saveAll(contactList);
-
-
-
-        /*
-        * надо дл] начала реализовать
-        * daoDBimpl
-        * 1
-        *
-        *
-        * */
-
-      contactList = myDbMethodsRealization.getAllStoredContacts();
-        System.out.println("qwe= "+contactList);
-        System.out.println(contactList);
-
-//        printAllContactList(contactList);
 
 //        получить данные пользователя
 //        сохранить данные пользователя

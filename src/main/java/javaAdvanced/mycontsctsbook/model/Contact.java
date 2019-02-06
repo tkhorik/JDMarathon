@@ -10,6 +10,13 @@ public class Contact implements Comparable<Contact> {
     String surname;
     String phoneNumber;
 
+    public Contact(String contactNumber, String name, String surname, String phoneNumber) {
+        this.contactNumber = contactNumber;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
+
 
     @Override
     public String toString() {
@@ -44,6 +51,46 @@ public class Contact implements Comparable<Contact> {
         this.contactNumber = contactNumber;
         this.name = name;
         this.surname = surname;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

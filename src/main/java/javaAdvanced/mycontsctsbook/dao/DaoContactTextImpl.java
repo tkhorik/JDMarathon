@@ -2,7 +2,6 @@ package javaAdvanced.mycontsctsbook.dao;
 
 import javaAdvanced.mycontsctsbook.model.Contact;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -31,8 +30,8 @@ public class DaoContactTextImpl implements IDAOContact {
     }
 
     @Override
-    public Contact addContact(Contact t) {
-        return null;
+    public void addContact(Contact t) {
+
     }
 
     @Override

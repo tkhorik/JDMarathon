@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletConfig;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ServerletPOST extends HttpServlet {
     private static final long serialVersionUID = -1641096228274971485L;
-    /*https://javatutorial.net/java-servlet-post-example form added during tutorial from present tutorial resource*/
+    /*https://javatutorial.net/java-servlet-post-example form added during tutorial from psent tutorial resource*/
 //    private static final String SERVLET_CONTEXT_KEY_INIT_PARAMETER = "servletContextKey";
 
 //    private HttpServlet mServlet;
@@ -40,7 +41,12 @@ public class ServerletPOST extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Contact> contactList = daoDBimpl.getAllStoredContacts();
+        List<Contact> contactList = null;
+        try {
+            contactList = daoDBimpl.getAllStoredContacts();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         for (Contact contact : contactList) {
             System.out.println(contact);
@@ -61,19 +67,31 @@ public class ServerletPOST extends HttpServlet {
                 .append("			<form action=\"welcome\" method=\"POST\">\r\n")
                 .append("				Enter your name and push the button: \r\n")
                 .append("				<input type=\"text\" name=\"user\" />\r\n")
+                .append("				<input type=\"text\" name=\"contactNumber\" />\r\n")
+                .append("				<input type=\"text\" name=\"name\" />\r\n")
+                .append("				<input type=\"text\" name=\"surname\" />\r\n")
+                .append("				<input type=\"text\" name=\"phoneNumber\" />\r\n")
                 .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
                 .append("			</form>\r\n")
                 .append("		<div>\r\n");
         for (Contact contact : contactList) {
-            writer.append("<div>"+ contact+"		</div>\r\n");
+            writer.append("<div>" + contact + "		</div>\r\n");
         }
-                writer.append("</html>\r\n");
+        writer.append("		<div>\r\n");
+        writer.append("</html>\r\n");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String user = request.getParameter("user");
+        List<Contact> contactList = null;
+        try {
+            contactList = daoDBimpl.getAllStoredContacts();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
@@ -94,7 +112,12 @@ public class ServerletPOST extends HttpServlet {
             writer.append("	You did not entered a name!\r\n");
         }
         writer.append("		</body>\r\n")
-                .append("</html>\r\n");
+                .append("		<div>\r\n");
+        for (Contact contact : contactList) {
+            writer.append("<div>" + contact + "		</div>\r\n");
+        }
+        writer.append("		<div>\r\n");
+        writer.append("</html>\r\n");
     }
 
 }
