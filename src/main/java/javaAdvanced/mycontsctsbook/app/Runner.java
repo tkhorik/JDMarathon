@@ -18,29 +18,14 @@ public class Runner {
     static IDAOContact idaoContact;
     static IDAOContact daotextfilesaving;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         context = new ClassPathXmlApplicationContext("context.xml");
         IDAOContact myDbMethodsRealization = (IDAOContact) context.getBean("myDbMethodsRealization");
-
-//        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
-//        idaoContact = (IDAOContact) context.getBean("myPersonalBean");
-        ArrayList<Contact> contactList = new ArrayList<>();
-//        ArrayList<Contact> allStoredContacts = myDbMethodsRealization.getAllStoredContacts();
-        Contact contact = new Contact("a2ebc", "dfg", "sdqd", "12223123");
+        ArrayList<Contact> allStoredContacts = myDbMethodsRealization.getAllStoredContacts();
+        Contact contact = new Contact("qwdqwdqwdqwd", "dfg", "sdqd", "12223123");
         myDbMethodsRealization.addContact(contact);
-//        System.out.println("wwwwwnew"+allStoredContacts);
-
-
-        try {
-            contactList = myDbMethodsRealization.getAllStoredContacts();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        printAllContactList(contactList);
-
-//        System.out.println("qwe= "+contactList);
-
+        printAllContactList(allStoredContacts);
 
 //        получить данные пользователя
 //        сохранить данные пользователя

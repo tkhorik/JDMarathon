@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletConfig;
@@ -17,22 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ServerletPOST extends HttpServlet {
     private static final long serialVersionUID = -1641096228274971485L;
-    /*https://javatutorial.net/java-servlet-post-example form added during tutorial from psent tutorial resource*/
-//    private static final String SERVLET_CONTEXT_KEY_INIT_PARAMETER = "servletContextKey";
-
-//    private HttpServlet mServlet;
 
     private ApplicationContext context;
     private IDAOContact idaoContact;
-    //    private IDAOContact daotextfilesaving;
     private IDAOContact daoDBimpl;
-
-//    private List<Contact> contactList = new LinkedList<>();
 
     public void init(ServletConfig servletConfig) throws ServletException {
         super.init(servletConfig);
         context = new ClassPathXmlApplicationContext("context.xml");
-//        daotextfilesaving = (IDAOContact) context.getBean("mySavingIntoFileBean");
         daoDBimpl = (IDAOContact) context.getBean("myDbMethodsRealization");
         idaoContact = (IDAOContact) context.getBean("myPersonalBean");
     }
@@ -46,10 +39,6 @@ public class ServerletPOST extends HttpServlet {
             contactList = daoDBimpl.getAllStoredContacts();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        for (Contact contact : contactList) {
-            System.out.println(contact);
         }
 
         // set response headers

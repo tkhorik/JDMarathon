@@ -10,7 +10,7 @@ public interface IDAOContact {
 
     List<Contact> saveAll(List<Contact> in);
 
-    void addContact(Contact t);
+    void addContact(Contact t) throws SQLException;
 
     ArrayList<Contact> getAllStoredContacts() throws SQLException;
 
