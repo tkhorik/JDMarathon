@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -34,26 +35,19 @@ public class ServerletPOST extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Contact> contactList = null;
-        try {
-            contactList = daoDBimpl.getAllStoredContacts();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // set response headers
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
+        List<Contact> contactList = getContacts(response);
 
         // create HTML form
         PrintWriter writer = response.getWriter();
         writer.append("<!DOCTYPE html>\r\n")
                 .append("<html>\r\n")
                 .append("		<head>\r\n")
+                .append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">")
                 .append("			<title>Form input</title>\r\n")
                 .append("		</head>\r\n")
                 .append("		<body>\r\n")
-                .append("			<form action=\"welcome\" method=\"POST\">\r\n")
+                .append("<h2>My Contact Address Book ура</h2>")
+                .append("			<form action=\"welcome\" method=\"POST\" acceptcharset=\"UTF-8\">\r\n")
                 .append("				Enter your name and push the button: \r\n")
                 .append("				<input type=\"text\" name=\"user\" />\r\n")
                 .append("				<input type=\"text\" name=\"contactNumber\" />\r\n")
@@ -74,8 +68,9 @@ public class ServerletPOST extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String user = request.getParameter("user");
-        String contactNumber = request.getParameter("contactNumber");
+        String contactNumber = request.getParameter ("contactNumber");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String phoneNumber = request.getParameter("phoneNumber");
@@ -87,28 +82,22 @@ public class ServerletPOST extends HttpServlet {
             e.printStackTrace();
         }
 
-        List<Contact> contactList = null;
-        try {
-            contactList = daoDBimpl.getAllStoredContacts();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
+        List<Contact> contactList = getContacts(response);
 
         // create HTML response
         PrintWriter writer = response.getWriter();
         writer.append("<!DOCTYPE html>\r\n")
                 .append("<html>\r\n")
                 .append("		<head>\r\n")
+                .append("<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">")
                 .append("			<title>Welcome message</title>\r\n")
                 .append("		</head>\r\n")
                 .append("		<body>\r\n");
+
         if (user != null && !user.trim().isEmpty()) {
             writer.append("	Welcome " + user + ".\r\n");
-            writer.append("	You successfully redirected.\r\n");
+            writer.append("	You successfully redirected.\r\n")
+            .append("<h2>My Contact Address Book Results</h2>");
 
         } else {
             writer.append("	You did not entered a name!\r\n");
@@ -120,6 +109,25 @@ public class ServerletPOST extends HttpServlet {
         }
         writer.append("		<div>\r\n");
         writer.append("</html>\r\n");
+    }
+
+    private List<Contact> getContacts(HttpServletResponse response) {
+        List<Contact> contactList = null;
+        contactList = getContacts(contactList);
+
+
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        return contactList;
+    }
+
+    private List<Contact> getContacts(List<Contact> contactList) {
+        try {
+            contactList = daoDBimpl.getAllStoredContacts();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contactList;
     }
 
 }

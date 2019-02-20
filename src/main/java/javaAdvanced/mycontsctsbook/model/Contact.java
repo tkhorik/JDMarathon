@@ -1,5 +1,6 @@
 package javaAdvanced.mycontsctsbook.model;
 
+import java.nio.charset.Charset;
 import java.util.Objects;
 
 public class Contact implements Comparable<Contact> {
