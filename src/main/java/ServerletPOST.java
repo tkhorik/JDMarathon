@@ -62,18 +62,31 @@ public class ServerletPOST extends HttpServlet {
                 .append("				<input type=\"text\" name=\"phoneNumber\" />\r\n")
                 .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
                 .append("			</form>\r\n")
+//                .append("<input type=\"checkbox\" name=\"language\" value=\"english\" />English   ")
+//                .append(" <input type=\"checkbox\" name=\"language\" value=\"french\" />French")
                 .append("		<div>\r\n");
         for (Contact contact : contactList) {
-            writer.append("<div>" + contact + "		</div>\r\n");
+            writer.append("<div>").append(contact.toString()).append("		</div>\r\n");
         }
         writer.append("		<div>\r\n");
         writer.append("</html>\r\n");
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("user");
+        String contactNumber = request.getParameter("contactNumber");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String phoneNumber = request.getParameter("phoneNumber");
+
+        Contact contact1 = new Contact(contactNumber,  name,  surname,  phoneNumber);
+        try {
+            daoDBimpl.addContact(contact1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         List<Contact> contactList = null;
         try {
             contactList = daoDBimpl.getAllStoredContacts();

@@ -23,7 +23,7 @@ public class Runner {
         context = new ClassPathXmlApplicationContext("context.xml");
         IDAOContact myDbMethodsRealization = (IDAOContact) context.getBean("myDbMethodsRealization");
         ArrayList<Contact> allStoredContacts = myDbMethodsRealization.getAllStoredContacts();
-        Contact contact = new Contact("qwdqwdqwdqwd", "dfg", "sdqd", "12223123");
+        Contact contact = new Contact("contactumner", "name", "surname", "+12223123");
         myDbMethodsRealization.addContact(contact);
         printAllContactList(allStoredContacts);
 
