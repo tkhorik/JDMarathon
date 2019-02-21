@@ -42,12 +42,28 @@ public class ServerletPOST extends HttpServlet {
         writer.append("<!DOCTYPE html>\r\n")
                 .append("<html>\r\n")
                 .append("		<head>\r\n")
+                .append("    <meta charset=\"utf-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
+                        "\n" +
+                        "    <!-- Bootstrap CSS -->\n" +
+                        "    <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">\n")
                 .append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">")
                 .append("			<title>Form input</title>\r\n")
                 .append("		</head>\r\n")
                 .append("		<body>\r\n")
-                .append("<h2>My Contact Address Book ура</h2>")
-                .append("			<form action=\"welcome\" method=\"POST\" acceptcharset=\"UTF-8\">\r\n")
+                .append("<h2>My Contact Address Book страница номер раз</h2>")
+                .append("<select name=\"whatActionToDo\">\n" +
+                        "\t<option value=\"tech\">Add new contact</option>\n" +
+                        "\t<option value=\"admin\">Find contact</option>\n" +
+                        "\t<option value=\"biology\">Edit contact</option>\n" +
+                        "\t<option value=\"biology\">Show all contacts</option>\n" +
+                        "</select> ")
+                .append("<select name=\"showContactListOrNot\">\n" +
+                        "\t<option value=\"tech\">Show all contact list</option>\n" +
+                        "\t<option value=\"biology\">Do not show contact list</option>\n" +
+                        "</select> ")
+                .append("<hr>")
+                .append("			<form action=\"phonebook\" method=\"POST\" acceptcharset=\"UTF-8\">\r\n")
                 .append("				Enter your name and push the button: \r\n")
                 .append("				<input type=\"text\" name=\"user\" />\r\n")
                 .append("				<input type=\"text\" name=\"contactNumber\" />\r\n")
@@ -56,13 +72,14 @@ public class ServerletPOST extends HttpServlet {
                 .append("				<input type=\"text\" name=\"phoneNumber\" />\r\n")
                 .append("				<input type=\"submit\" value=\"Submit\" />\r\n")
                 .append("			</form>\r\n")
-//                .append("<input type=\"checkbox\" name=\"language\" value=\"english\" />English   ")
-//                .append(" <input type=\"checkbox\" name=\"language\" value=\"french\" />French")
-                .append("		<div>\r\n");
+                .append("<span>")
+                .append("<hr>")
+                .append("		</div>\r\n")
+                .append("<div style=\"background-color:E2E2E2\">");
         for (Contact contact : contactList) {
             writer.append("<div>").append(contact.toString()).append("		</div>\r\n");
         }
-        writer.append("		<div>\r\n");
+        writer.append("		</div>\r\n");
         writer.append("</html>\r\n");
     }
 
@@ -70,12 +87,12 @@ public class ServerletPOST extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String user = request.getParameter("user");
-        String contactNumber = request.getParameter ("contactNumber");
+        String contactNumber = request.getParameter("contactNumber");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String phoneNumber = request.getParameter("phoneNumber");
 
-        Contact contact1 = new Contact(contactNumber,  name,  surname,  phoneNumber);
+        Contact contact1 = new Contact(contactNumber, name, surname, phoneNumber);
         try {
             daoDBimpl.addContact(contact1);
         } catch (SQLException e) {
@@ -85,6 +102,7 @@ public class ServerletPOST extends HttpServlet {
         List<Contact> contactList = getContacts(response);
 
         // create HTML response
+        response.sendRedirect("/");
         PrintWriter writer = response.getWriter();
         writer.append("<!DOCTYPE html>\r\n")
                 .append("<html>\r\n")
@@ -97,7 +115,7 @@ public class ServerletPOST extends HttpServlet {
         if (user != null && !user.trim().isEmpty()) {
             writer.append("	Welcome " + user + ".\r\n");
             writer.append("	You successfully redirected.\r\n")
-            .append("<h2>My Contact Address Book Results</h2>");
+                    .append("<h2>My Contact Address Book Results</h2>");
 
         } else {
             writer.append("	You did not entered a name!\r\n");
